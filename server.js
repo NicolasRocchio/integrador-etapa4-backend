@@ -2,6 +2,8 @@ import express from "express";
 import "dotenv/config";
 import routerProductos from "./routers/productos.router.js";
 import getConnection from "./utils/get-connection.js";
+import cors from "cors";
+import routerCarritos from "./routers/carritos.router.js";
 
 //! variables/Constantes
 const app = express();
@@ -10,9 +12,11 @@ const uri_remota = process.env.URI_MONGO;
 
 //! Middlewares
 app.use(express.json());
+app.use(cors());
 
 //! Rutas
 app.use("/api/v1/productos", routerProductos);
+app.use("/api/v1/carritos", routerCarritos);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
