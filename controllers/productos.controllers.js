@@ -1,9 +1,10 @@
 import modelos from "../models/productos.models.js";
+import handleMongoId from "../utils/handle-mongo-id.js";
 
 const getAll = async (req, res) => {
   try {
     const productos = await modelos.obtenerTodos();
-    res.json({ productos });
+    res.json(handleMongoId(productos));
   } catch (error) {
     console.log("[gatAll]", error);
   }
@@ -14,7 +15,7 @@ const getOne = async (req, res) => {
 
   try {
     const producto = await modelos.obtenerUnProducto(id);
-    res.json({ producto });
+    res.json(handleMongoId(producto));
   } catch (error) {
     console.log("[getOne]", error);
   }
@@ -40,7 +41,7 @@ const update = async (req, res) => {
       id,
       productoEditado
     );
-    res.send("Ok -> PUT (UPDATE)");
+    res.json(productoActualizado);
   } catch (error) {
     console.log("[update]", error);
   }

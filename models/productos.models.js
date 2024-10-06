@@ -8,7 +8,7 @@ const obtenerTodos = async () => {
     const productos = await ProductoModelo.find();
     return productos;
   } catch (error) {
-    console.log("[obtenerTodos]", error);
+    throw error;
   }
 };
 
@@ -17,7 +17,7 @@ const obtenerUnProducto = async (id) => {
     const producto = await ProductoModelo.findById(id);
     return producto;
   } catch (error) {
-    console.log("[obtenerUnProducto]", error);
+    throw error;
   }
 };
 
@@ -26,18 +26,30 @@ const crearProducto = async (producto) => {
     const productoCreado = await ProductoModelo.create(producto);
     return productoCreado;
   } catch (error) {
-    console.log("[crearProducto]", error);
+    throw error;
   }
 };
 
-const updateProducto = () => {};
+const updateProducto = async (id, productoEditado) => {
+  try {
+    const options = { new: true };
+    const productoYaEditado = await ProductoModelo.findByIdAndUpdate(
+      id,
+      productoEditado,
+      options
+    );
+    return productoYaEditado;
+  } catch (error) {
+    throw error;
+  }
+};
 
 const deleteProducto = async (id) => {
   try {
     const productoBorrado = await ProductoModelo.findByIdAndDelete(id);
     return productoBorrado;
   } catch (error) {
-    console.log("[deleteProducto]", error);
+    throw error;
   }
 };
 
