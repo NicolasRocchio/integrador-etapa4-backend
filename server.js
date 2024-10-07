@@ -19,7 +19,7 @@ app.use("/api/v1/productos", routerProductos);
 app.use("/api/v1/carritos", routerCarritos);
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.redirect("/api/v1/productos");
 });
 
 app.all("*", (req, res) => {
